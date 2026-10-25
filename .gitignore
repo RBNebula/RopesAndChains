@@ -52,10 +52,7 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-# Local IDE
-.vs/
-.idea/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
+
+# Local assets
+Branding/
+DirectoryOverview.md

@@ -1,12 +1,8 @@
 namespace RopesAndChains;
 
-[BepInPlugin(PluginGuid, PluginName, PluginVersion)]
+[BepInPlugin(ModInfo.PLUGIN_GUID, ModInfo.PLUGIN_NAME, ModInfo.PLUGIN_VERSION)]
 public sealed class RopesAndChainsPlugin : BaseUnityPlugin
 {
-    public const string PluginGuid = "com.ryanb.ropesandchains";
-    public const string PluginName = "Ropes and Chains";
-    public const string PluginVersion = "0.2.0";
-
     private static readonly FieldInfo? GrabJointField = AccessTools.Field(typeof(PlayerController), "_grabJoint");
     private static readonly FieldInfo? InteractRangeField = AccessTools.Field(typeof(PlayerController), "_interactRange");
 
@@ -56,9 +52,9 @@ public sealed class RopesAndChainsPlugin : BaseUnityPlugin
         AnchorModuleEnabled = Config.Bind("Visual", "AnchorModuleEnabled", true, "Show a hanger module at the terrain anchor.");
         AnchorModuleScale = Config.Bind("Visual", "AnchorModuleScale", 1f, "Scale multiplier for the terrain hanger module.");
 
-        _harmony = new Harmony(PluginGuid);
+        _harmony = new Harmony(ModInfo.HARMONY_ID);
         _harmony.PatchAll(typeof(RopesAndChainsPlugin).Assembly);
-        Logger.LogInfo($"{PluginName} {PluginVersion} initialized.");
+        Logger.LogInfo($"{ModInfo.LOG_PREFIX} {ModInfo.PLUGIN_NAME} {ModInfo.PLUGIN_VERSION} initialized.");
     }
 
     private void Update()
@@ -283,7 +279,7 @@ public sealed class RopesAndChainsPlugin : BaseUnityPlugin
 
     internal static void LogError(string context, Exception ex)
     {
-        (s_log ?? BepInEx.Logging.Logger.CreateLogSource(PluginName)).LogError($"{context}: {ex}");
+        (s_log ?? BepInEx.Logging.Logger.CreateLogSource(ModInfo.PLUGIN_NAME)).LogError($"{context}: {ex}");
     }
 }
 
